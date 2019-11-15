@@ -176,7 +176,8 @@ class Qube(Resource):
         parser.add_argument('name', required=True)
         parser.add_argument('type')
         args = parser.parse_args()
-        new_vm = self.qubes.clone_vm(name, args.name, new_cls=args.type)
+        # add ignore_error for qvm-appmenus missing
+        new_vm = self.qubes.clone_vm(name, args.name, ignore_errors=True, new_cls=args.type)
         return qube_formatter.to_dict(new_vm), 201
 
 
